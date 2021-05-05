@@ -57,14 +57,5 @@ router.delete('/delete/:id', function (req, res, next) {
     }).then(doc => res.send(doc));
 });
 
-router.post('/ajouter', function (req, res, next) {
 
-
-    db.commentaire.create({
-        text: req.body.text,
-        idDocument: req.body.idDocument,
-
-
-    }).then((doc) => res.send(doc));
-})
 module.exports = router;
