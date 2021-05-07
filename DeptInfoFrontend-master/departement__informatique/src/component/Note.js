@@ -1,94 +1,64 @@
 
-import React, { useEffect, useState, useRef } from 'react'
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { withRouter, useHistory } from "react-router-dom";
-
+import React  , {useEffect  , useState , useRef} from 'react'
+import { Link } from 'react-router-dom'
+import Note from './Note'
 import '../Style/notes.css'
 import axios from 'axios'
 import AddIcon from '@material-ui/icons/Add';
 import Modal from 'react-modal';
 import { useStateValue } from "../StateProvider";
-import '../Style/note.css'
 
-
+import SearchIcon from '@material-ui/icons/Search';
 import '../Style/NouveauDocument.css';
-
+import Button from '@material-ui/core/Button';
 
 import useForceUpdate from 'use-force-update';
+import Pagination from './Pagination'
 
-//var encoder = require('int-encoder')
 
-function Note({ titre__note, description__note, lastUpdate__note, type__note, id__note}) {
-    const history = useHistory();
+const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
 
-    const [classe, setclasse] = useState("note__options__list_hiden")
-    // note_id contient la valeur id de la note courante 
-    const [{ note_id}, dispatch] = useStateValue();
-   
-  
+function Notes() {
+    const [{ note_id }] = useStateValue();
     const [nouveauDocument, setNouveauDocument] = useState(false);
     const [promotions, setPromotions] = useState([]);
-    const [promotion, setPromotion] = useState("Premiere Annee");
-    const [typeDocument, setTypeDocument] = useState(type__note);
+    const [promotion, setPromotion] = useState("Promotions");
+    const [typeDocument, setTypeDocument] = useState("Tout");
     const [document, setDocument] = useState(null);
-    const [typeDoc, setTypeDoc] = useState("Emploi du temps")
-    const [titre, setTitre] = useState(titre__note);
-    const [deleteModal, setDeleteModal] = useState(false)
-    const [description, setDescription] = useState(description__note);
+    const [titre, setTitre] = useState("");
+    const [description, setDescription] = useState("");
+    const [currentpage, setCurrentpage] = useState(1)
+    const [NotePerPage, setNotePerPage] = useState(5)
 
 
-    const wrraper_ref = useRef(null)
+    const indexLastNote=currentpage*NotePerPage;
+    
+    const indexFistNote = indexLastNote-NotePerPage;
+    console.log(indexLastNote)
+    console.log(indexFistNote)
 
+    const myRef = useRef(null)
+
+
+
+    const paginate = (index)=>{
+        setCurrentpage(index)
+        scrollToRef(myRef)
+    }
+    
     const forceUpdate = useForceUpdate();
 
+  
 
+    
 
-    const customStyles = {
-        content: {
-            top: '50%',
-            left: '50%',
-            right: 'auto',
-            bottom: 'auto',
-            marginRight: '-50%',
-            transform: 'translate(-50%, -50%)',
-            height: "35%",
-            width: "50%"
-        }
-    };
 
 
 
     const openModal = () => {
-      
-        switch (typeDocument) {
-            case "EMPLOI_DU_TEMPS":
-                setTypeDoc("Emploi du temps")
-                break
-
-            case "NOTES_SEMINAIRE":
-                setTypeDoc("Note de seminaire")
-                break
-
-            case "NOTES_EVENEMENT":
-                setTypeDoc("Note d'evenement")
-                break
-
-            case "NOTES_DE_SORTIE":
-                setTypeDoc("Note de sortie")
-                break
-
-            case "REPPORT_DU_COURS":
-                setTypeDoc("Repport du cours")
-                break
-            case "AUTRE":
-                setTypeDoc("Autre")
-                break
-
-            default:
-                setTypeDoc('');
-        }
         setNouveauDocument(true);
     };
+
 
 
     const closeModal = () => {
@@ -103,6 +73,8 @@ function Note({ titre__note, description__note, lastUpdate__note, type__note, id
         setTitre("");
         setDescription("");
     };
+
+
     useEffect(() => {
         Modal.setAppElement('body');
         let promotions = [
@@ -121,11 +93,15 @@ function Note({ titre__note, description__note, lastUpdate__note, type__note, id
                 };
             })
         );
-        
-       
-       
     }, []);
 
+    const customStyles = {
+        content: {
+            'z-index': '2',
+            top: '10%'
+
+        }
+    };
 
     const handleChange = (event) => {
         const target = event.target;
@@ -144,119 +120,167 @@ function Note({ titre__note, description__note, lastUpdate__note, type__note, id
         }
     };
 
-    const ModifierDoc = (event) => {
+    // Ajout d'une nouvelle note
 
-        // On récupére la valeur id de la note 
-        dispatch({
-            type: "SET_NOTE_ID",
-            note_id: id__note,
-        },
+    const addDoc = () => {
 
-           
-
-        );
-
-        // on utilise id pour modifer la note
-
-        axios.put(`http://localhost:8081/document/edit/${note_id}`,
-            {
+          if(titre=='' ){
+              alert('Veuillez Introduire le titre de la note ')
               
-            
-                "typeDocument": typeDocument,
-                "titre": titre,
-                
-              
-                
-                "description": description,
-                
-            },
-        ).then(function (response) {
-            console.log(response);
-        }).catch(function (error) {
-            console.log(error);
-        });
+          }
+          if(promotions.length==0){
+              alert('Veuillez Spécifier  la promotion ')
+          }
+
+        // Create an object of formData
+        const formData = new FormData();
+        console.log(description);
+        // Update the formData object
+        formData.append("file", document);
+        formData.append('titre', titre);
+        formData.append('description', description);
+        formData.append("typeDocument", typeDocument);
+        formData.append("promotions", JSON.stringify(promotions));
+      
+
+        // Request made to the backend api
+        // Send formData object
+        axios.post("http://localhost:8081/upload", formData);
         closeModal();
-        window.location.reload()
     };
-
     
-     async function setid(){
-       await dispatch({
-            type: "SET_NOTE_ID",
-            note_id: id__note,
-        },
+    const [nomDocument, setNomDocument] = useState([]);
 
-           
-            
+    // Affichage des notes
 
-        );
+    useEffect(() => {
 
-        // redirect vers la page Note Detail de la note 
+        const afficherDocument = (e) => {
+            axios.get('http://localhost:8081/document/info'
+            ).then(res => {
+                //console.log(res.data[0].titre);
+                //Parse if it a json object
+                const noms = [];
+                res.data.forEach((doc) => noms.push(doc));
+                console.log(noms);
+                setNomDocument(noms);
+                
+            });
+        }
+        afficherDocument()
        
-          history.push('/NoteDetail/' + encoder.encode(id__note))
-
-       // history.push('/NoteDetail/' + id__note)
-
-       
-
-       
- 
-
-    }
-       
+    }, [])
+   
+    
+    // console.log(nomDocument)
+    const searchNote=()=>{
+        console.log(promotion)
+        console.log(typeDocument)
         
+        if(promotion=="Promotions" && typeDocument=="Tout"){
+            // On affiche tout 
+            axios.get(`http://localhost:8081/document/info`
+            ).then(res => {
+                //console.log(res.data[0].titre);
+                //Parse if it a json object
+                const noms = [];
+                res.data.forEach((doc) => noms.push(doc));
+                console.log(noms);
 
+                setNomDocument(noms);
 
-//   Gestion d'affichage du menu modificationet suppression
-    const ShowMenu= ()=>{
-        dispatch({
-            type: "SET_NOTE_ID",
-            note_id: id__note,
-        })
-
-
-        if (classe=="note__options__list_hiden"){
-            setclasse("note__options__list")
-
-        }else{
-            setclasse("note__options__list_hiden")
+            });
 
         }
 
+        
+        else{
+            //On affiche selon les valeurs choisies
+            axios.get(`http://localhost:8081/document/?promotion=${promotion}&typeDocument=${typeDocument}`
+            ).then(res => {
+                //console.log(res.data[0].titre);
+                //Parse if it a json object
+                const noms = [];
+                res.data.forEach((doc) => noms.push(doc));
+                console.log(noms);
 
+                setNomDocument(noms);
+
+            });
+            
+            
+
+        }
        
     }
 
-    // Suppression de la note par id
-    const deleteNote =() => {
-        axios.delete(`http://localhost:8081/document/delete/${note_id}`
-        ).then(res => {
-            //console.log(res.data[0].titre);
-            //Parse if it a json object
-            console.log(res)
+    
 
-        });
-   
-         window.location.reload()
-
-    }
-
-  
-    // Gerer l'affichage au cas d'une long description 
-
-    function truncate(str, n) {
-        return str?.length > n ? str.substr(0, n - 1) + "..." : str;
-    }
-   
     return (
-        <div className="note" ref={wrraper_ref}>
+
+        
+        <div className="notes" ref={myRef}>
+             
+             
+
+            <div className="notes__head" >
+
+                <select onChange={(e)=>{
+                    const value=e.target.value
+                    setPromotion(value)
+                   
+                }}>
+
+                    <option value="Promotions">Promotions</option>
+                    <option value="Premiere Annee">Premiere Annee</option>
+                    <option value="Deuxieme Annee">Deuxieme Annee</option>
+                    <option value="Troisieme Annee">Troisieme Annee</option>
+                   
+                </select>
+               
+                
+                
+
+                <select id="typeDocument" name="typeDocument" onChange={e => {
+                    const value = e.target.value
+                    setTypeDocument(value)}} required>
+
+                    <option value="Tout">Tout</option>
+                    <option value="EMPLOI_DU_TEMPS">Emploi du temps</option>
+                    <option value="NOTES_SEMINAIRE">Note de seminaire</option>
+                    <option value="NOTES_EVENEMENT">Note d'evenement</option>
+                    <option value="NOTES_DE_SORTIE">Note de sortie</option>
+                    <option value="REPPORT_DU_COURS">Repport du cours</option>
+                    <option value="AUTRE">Autre</option>
+                </select>
+                
+             
+
+
+                <button className="notes__head__searchbtn" onClick={searchNote}>
+                  <SearchIcon/>
+                </button>
+
+
+
+                <Button size="medium"
+                    color="primary"
+                    startIcon={<AddIcon />}
+                    onClick={openModal}
+                    className="notes__ajouter__btn"
+                >
+                    Nouveau Document
+                </Button>
+            </div>
+                
+                
 
             {
                 nouveauDocument &&
-                (<Modal isOpen={true} onRequestClose={closeModal}>
+                (<Modal isOpen={true} onRequestClose={closeModal} style={customStyles}>
                     <div className="modal-add-doc ">
                         <div className="header-add-doc">
-                            <AddIcon />{" "}<h2>Modifier Note</h2>
+                            <AddIcon />{" "}<h2>Nouvelle Note</h2>
                         </div>
                         <hr />
                         <div className="content">
@@ -328,7 +352,7 @@ function Note({ titre__note, description__note, lastUpdate__note, type__note, id
                                         <label htmlFor="titre">Titre</label>
                                     </div>
                                     <div className="col-75">
-                                        <input type="text" id="titre" name="titre" value={titre} onChange={handleChange} required />
+                                        <input type="text" id="titre" name="titre" placeholder="Titre" onChange={handleChange} required />
                                     </div>
                                 </div>
                                 <div className="row">
@@ -337,11 +361,7 @@ function Note({ titre__note, description__note, lastUpdate__note, type__note, id
                                     </div>
                                     <div className="col-75">
                                         <select id="typeDocument" name="typeDocument" onChange={handleChange} required>
-
-
-
-                                            <option value={typeDocument}>{typeDoc}</option>
-                                          
+                                            <option value="AUTRE">Autre</option>
                                             <option value="EMPLOI_DU_TEMPS">Emploi du temps</option>
                                             <option value="NOTES_SEMINAIRE">Note de seminaire</option>
                                             <option value="NOTES_EVENEMENT">Note d'evenement</option>
@@ -355,7 +375,7 @@ function Note({ titre__note, description__note, lastUpdate__note, type__note, id
                                         <label htmlFor="description">Description</label>
                                     </div>
                                     <div className="col-75">
-                                        <textarea id="description" name="description" placeholder="Description" value={description} onChange={handleChange} required />
+                                        <textarea id="description" name="description" placeholder="Description" onChange={handleChange} required  />
                                     </div>
                                 </div>
                                 <div className="row">
@@ -369,68 +389,54 @@ function Note({ titre__note, description__note, lastUpdate__note, type__note, id
                                 </div>
                                 <div className="row row-btn">
                                     <input type="button" className="annuler" onClick={closeModal} value="Annuler" />
-                                    <input type="button" className="submit" onClick={ModifierDoc} value="Modifier" />
-
+                                    <input type="button" className="submit" onClick={addDoc} value="Ajouter" />
+                                    
                                 </div>
                             </form>
                         </div>
                     </div>
                 </Modal>)
             }
-             <div className="note__title__time">
-                <div className="note__title__time__left">
-                    <h5>{titre__note}</h5>
-                    <span>{lastUpdate__note}</span>
-                </div>
 
-                <div className="note__title__time__right">
-                    <MoreVertIcon onClick={ShowMenu} className="MoreIcon" />
-                    <div className="note__options" >
-                       <ul className={`${classe}`}>
-                         <li>
-                                <span onClick={openModal}>Modifier</span>
-                         
-                         </li>
-                            <li>
-                                <span onClick={()=>setDeleteModal(true)}>Supprimer</span>
-
-                            </li>
-                       </ul>
-                    </div>
-                </div>
-
-                <Modal isOpen={deleteModal} style={customStyles}>
-                    <h5>Vous voulez Supprimer la note? </h5>
-                    <hr />
-                    <br /><br /><br />
-                    <div className="row row-btn">
-                       
-
-                        <input type="button" className="annuler" onClick={() => { setDeleteModal(false) }} value="Annuler" />
-
-
-                        <input type="button" className="submit" onClick={deleteNote} value="Spprimer" />
-
-                    </div>
-
-
-                </Modal>
-                
-               
-             </div>
-             <div className="note__text">
-                <p>{truncate(description__note,70)} </p>
-             </div>
-  
-              <div className="note_btn">
-                <button className="btn btn-primary" onClick={setid}>Voir plus </button>
-              </div>
-              
+     
+       
             
+            {nomDocument?.length === 0 ? (
+                <div>
+                    <h5 className="note_NonTrouvée">Aucune Note trouvée</h5>
+                </div>
+            ) : (
+                <div>
+                  
+                  
+                    {nomDocument.slice(indexFistNote,indexLastNote).map(note => (
+
+
+                        <Note
+                            id__note={note.numeroDocument}
+                            titre__note={note.titre}
+                            description__note={note.description}
+                            type__note={note.typeDocument}
+                            lastUpdate__note={note.updatedAt} />
+                    ))}
+
+
+                        <div className="pagination_tab">
+                            <Pagination NotePerPage={NotePerPage} TotalNote={nomDocument.length} paginate={paginate} />
+
+                        </div>
+
+                </div>
+            )
+            }
+            
+
+            
+       
+                    
+
         </div>
-            
-        
     )
 }
 
-export default  Note
+export default Notes
