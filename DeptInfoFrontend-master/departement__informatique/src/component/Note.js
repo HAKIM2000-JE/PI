@@ -16,6 +16,8 @@ import '../Style/NouveauDocument.css';
 
 import useForceUpdate from 'use-force-update';
 
+var encoder = require('int-encoder')
+
 function Note({ titre__note, description__note, lastUpdate__note, type__note, id__note}) {
     const history = useHistory();
 
@@ -191,7 +193,8 @@ function Note({ titre__note, description__note, lastUpdate__note, type__note, id
 
         // redirect vers la page Note Detail de la note 
        
-         history.push('/NoteDetail/' + id__note)
+          history.push('/NoteDetail/' + encoder.encode(id__note))
+
 
        
 
