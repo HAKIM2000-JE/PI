@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../models');
-var encoder = require('int-encoder')
+// var encoder = require('int-encoder')
 
 
 /* GET users listing. */
@@ -73,7 +73,8 @@ router.get('/notes/:id', function (req, res, next) {
     db.document.findAll({
         where: {
            
-           numeroDocument:  encoder.decode(req.params.id),
+//            numeroDocument:  encoder.decode(req.params.id),
+            numeroDocument:  req.params.id,
         }
     }).then(document => res.send(document));
 });
