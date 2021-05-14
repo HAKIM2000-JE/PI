@@ -10,10 +10,18 @@ import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded';
 import { Document, Page } from 'react-pdf';
 
 const path = "http://localhost:8081/public/documents__tableau__affichage/";
+var encoder = require('int-encoder')
+
+encoder.alphabet('0123456789abcdef')
+
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 var download = require("downloadjs")
+
+
+
+
 
 
 
@@ -27,6 +35,8 @@ function NoteDetail(props) {
     const [pdf, setPdf] = useState("")
     const [pageNumber, setPageNumber] = useState(1);
     const history = useHistory();
+
+
   
      const back = ()=>{
          history.replace(`/notes`)
@@ -63,7 +73,7 @@ function NoteDetail(props) {
                     const noms = [];
                     response.data.forEach((doc) => {
                        
-                        if (doc.idDocument == props.match.params.id){
+                        if (doc.idDocument == encoder.decode(props.match.params.id) / 458015185151881){
                             noms.push(doc)
                             console.log(doc.idDocument)
                         }
@@ -86,6 +96,8 @@ function NoteDetail(props) {
         
     },[] )
 
+
+
     
     function onDocumentLoadSuccess({ numPages }) {
         setNumPages(numPages);
@@ -94,7 +106,7 @@ function NoteDetail(props) {
     const ajouterCommentaire =()=>{
         axios.post('http://localhost:8081/commentaire/ajouter',{
             text : text,
-            idDocument: props.match.params.id
+            idDocument: encoder.decode(props.match.params.id) / 458015185151881,
         }).then(function (response) {
             console.log(response);
         }).catch(function (error) {
@@ -137,6 +149,21 @@ function NoteDetail(props) {
 
                                     </div>
 
+                                    <div className="notedetail___download" onClick={() => {
+                                        download(path + doc.titre + ".pdf");
+                                        // download("http://i.imgur.com/G9bDaPH.jpg", options, function (err) {
+                                        //     if (err) throw err
+                                        //     console.log("meow")
+                                        // })
+                                    }}>
+
+                                        <p>Télecharger </p>
+                                        <GetAppRoundedIcon
+                                            className="icon"
+                                            
+                                        />
+                                    </div>
+
                                 </div>
 
                                 <div className="notedetail__message">
@@ -159,16 +186,7 @@ function NoteDetail(props) {
                                         </Document>
                                          <br/>
 
-                                         <div className="notedetail___download">
-
-                                             <p>Télecharger le document</p>
-                                            <GetAppRoundedIcon
-                                                className="icon"
-                                                onClick={() => {
-                                                    download(path + doc.titre + ".pdf");
-                                                }}
-                                            />
-                                         </div>
+                                         
                                         
                                     </div>
 
