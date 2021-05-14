@@ -1,4 +1,4 @@
-import React  , {useEffect  , useState} from 'react'
+import React  , {useEffect  , useState , useRef} from 'react'
 import { Link } from 'react-router-dom'
 import Note from './Note'
 import '../Style/notes.css'
@@ -12,6 +12,10 @@ import '../Style/NouveauDocument.css';
 import Button from '@material-ui/core/Button';
 
 import useForceUpdate from 'use-force-update';
+import Pagination from './Pagination'
+
+
+const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
 
 function Notes() {
     const [{ note_id }] = useStateValue();
@@ -22,8 +26,28 @@ function Notes() {
     const [document, setDocument] = useState(null);
     const [titre, setTitre] = useState("");
     const [description, setDescription] = useState("");
+    const [currentpage, setCurrentpage] = useState(1)
+    const [NotePerPage, setNotePerPage] = useState(5)
+
+
+    const indexLastNote=currentpage*NotePerPage;
+    
+    const indexFistNote = indexLastNote-NotePerPage;
+    console.log(indexLastNote)
+    console.log(indexFistNote)
+
+    const myRef = useRef(null)
+
+
+
+    const paginate = (index)=>{
+        setCurrentpage(index)
+        scrollToRef(myRef)
+    }
     
     const forceUpdate = useForceUpdate();
+
+  
 
     
 
@@ -99,6 +123,14 @@ function Notes() {
 
     const addDoc = () => {
 
+          if(titre=='' ){
+              alert('Veuillez Introduire le titre de la note ')
+              
+          }
+          if(promotions.length==0){
+              alert('Veuillez Spécifier  la promotion ')
+          }
+
         // Create an object of formData
         const formData = new FormData();
         console.log(description);
@@ -121,6 +153,7 @@ function Notes() {
     // Affichage des notes
 
     useEffect(() => {
+
 
         const afficherDocument = (e) => {
             axios.get('http://localhost:8081/document/info'
@@ -186,11 +219,11 @@ function Notes() {
     return (
 
         
-            <div className="notes">
+        <div className="notes" ref={myRef}>
              
              
 
-            <div className="notes__head">
+            <div className="notes__head" >
 
                 <select onChange={(e)=>{
                     const value=e.target.value
@@ -232,11 +265,16 @@ function Notes() {
 
                 <Button size="medium"
                     color="primary"
-                    startIcon={<AddIcon />}
+                
                     onClick={openModal}
                     className="notes__ajouter__btn"
                 >
+                 <AddIcon />
+                    <span className="Nouveau__Document
+                   ">
                     Nouveau Document
+                   
+                 </span>
                 </Button>
             </div>
                 
@@ -342,7 +380,7 @@ function Notes() {
                                         <label htmlFor="description">Description</label>
                                     </div>
                                     <div className="col-75">
-                                        <textarea id="description" name="description" placeholder="Description" onChange={handleChange} required />
+                                        <textarea id="description" name="description" placeholder="Description" onChange={handleChange} required  />
                                     </div>
                                 </div>
                                 <div className="row">
@@ -376,7 +414,7 @@ function Notes() {
                 <div>
                   
                   
-                    {nomDocument.map(note => (
+                    {nomDocument.slice(indexFistNote,indexLastNote).map(note => (
 
 
                         <Note
@@ -386,6 +424,13 @@ function Notes() {
                             type__note={note.typeDocument}
                             lastUpdate__note={note.updatedAt} />
                     ))}
+
+
+                        <div className="pagination_tab">
+                            <Pagination NotePerPage={NotePerPage} TotalNote={nomDocument.length} paginate={paginate} />
+
+                        </div>
+
                 </div>
             )
             }
