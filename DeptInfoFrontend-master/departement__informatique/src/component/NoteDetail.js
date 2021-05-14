@@ -141,7 +141,7 @@ function NoteDetail(props) {
                                     <div className="">
                                         <h6 className="notedetail__account__name" >Undifined</h6>
 
-                                        {/*<span className="notedetail__account__post">Chef du Département</span>*/}
+                                      
 
 
 
