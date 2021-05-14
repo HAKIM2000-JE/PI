@@ -13,6 +13,15 @@
    backdrop-filter:  opacity(0.2);
 }
 
+
+.mask>ul>li{
+  min-width: fit-content;
+}
+
+.quote{
+  margin-left: 25%;
+}
+
 .logo__container{
     /* display: flex; */
     z-index: 2;
@@ -30,6 +39,7 @@
     line-height: 1.85;
     letter-spacing: 4px;
     font-size: 100px;
+    width: 100%;
 }
 
 .content-slider {
@@ -39,7 +49,7 @@
 
 .slider {
   height: 320px;
-  width: 680px;
+  width: 100%;
   margin: 40px auto 0;
   overflow: visible;
   position: relative;
@@ -48,6 +58,7 @@
 .mask {
   overflow: hidden;
   height: 320px;
+  width: 100%;
 }
 
 .slider ul {
@@ -57,7 +68,7 @@
 }
 
 .slider li {
-  width: 680px;
+  width: 100%;
   height: 320px;
   position: absolute;
   top: -325px;
@@ -71,7 +82,7 @@
 
 .slider .source {
   font-size: 20px;
-  text-align: right;
+  text-align: center;
 }
 
 .slider li.anim1 {
@@ -358,4 +369,14 @@
         opacity: 0;
         transform: rotate(45deg) translate(10px ,10px);
     }
+}
+
+@media (max-width: 900px) {
+    
+
+     .quote{
+       /* display: none; */
+       font-size: 20px !important;
+       margin: 0 auto;
+     }
 }
