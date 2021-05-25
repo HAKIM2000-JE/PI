@@ -13,16 +13,27 @@ const AddUser = (props) => {
 
     const [modalAdd, setModalAdd] = useState();
 
-    const [password, setPassword] = useState("");
-    const [matricule, setMatricule] = useState("");
-    const [nom, setNom] = useState("");
-    const [prenom, setPrenom] = useState("");
-    const [email, setEmail] = useState("");
-    const [specialite, setSpecialite] = useState("");
-    const [grade, setGrade] = useState("");
-    const [genie, setGenie] = useState("");
+    const [formdata,setformdata]=useState({
 
-    const [open, setOpen] = React.useState(false);
+
+        email:'',
+        password:'',
+        matricule:'',
+        nom:'',
+        prenom:'',
+        specialite:'',
+        grade:'',
+        genie:'',
+        
+    }) 
+        
+    const change=(e)=>{
+        
+        setformdata({...formdata,[e.target.name]:e.target.value})
+        
+    }
+    
+
     const [value1, setValue1] = React.useState("Enseignant");
     const [value2, setValue2] = React.useState("Groupe d'utilisateur");
 
@@ -45,57 +56,42 @@ const AddUser = (props) => {
     const addEnseignant = (event)=>{
 
         // Create an object of formData
-        const formData = new FormData();
+        const formDataAxios = new FormData();
         // Update the formData object
-        formData.append("nom",nom);
-        formData.append('prenom', prenom);
-        formData.append('email', email);
-        formData.append("mot de passe", password);
-        formData.append("specialite", specialite);
-        formData.append("grade", grade);
+        formDataAxios.append("nom",formdata.nom);
+        formDataAxios.append('prenom', formdata.prenom);
+        formDataAxios.append('email', formdata.email);
+        formDataAxios.append("password", formdata.password);
+        formDataAxios.append("specialite", formdata.specialite);
+        formDataAxios.append("grade", formdata.grade);
 
         // Request made to the backend api
         // Send formData object
-        axios.post("https://dept-info.herokuapp.com/enseignant/", formData);
+        axios.post("http://localhost:8081/enseignant/", formDataAxios);
     };
-    const handleChange1 = (event) => {
-        setValue1(event.target.value);
-    };
-    const handleChange2 = (event) => {
-        setValue2(event.target.value);
-    };
+    
+    // const handleChange1 = (event) => {
+    //     setValue1(event.target.value);
+    // };
+    // const handleChange2 = (event) => {
+    //     setValue2(event.target.value);
+    // };
 
-    const handleChange = (event) =>{
-        const target = event.target;
-        const name = target.name;
-        const value = target.value;
-        name === "nom"
-            ? setNom(value)
-            : name === "prenom"
-            ? setPrenom(value)
-            : email==="email"
-                ?setEmail(value)
-                :password==="mot de passe"
-                    ?setPassword(value)
-                    :specialite==="specialite"
-                        ?setSpecialite(value)
-                        : setGrade(value);
-    }
     const addEtudiant = (event)=>{
 
-        // Create an object of formData
-        const formData = new FormData();
-        // Update the formData object
-        formData.append("matricule",matricule);
-        formData.append("nom",nom);
-        formData.append('prenom', prenom);
-        formData.append('email', email);
-        formData.append("mot de passe", password);
-        formData.append("genie", genie);
+        // // Create an object of formData
+        // const formData = new FormData();
+        // // Update the formData object
+        // formData.append("matricule",matricule);
+        // formData.append("nom",nom);
+        // formData.append('prenom', prenom);
+        // formData.append('email', email);
+        // formData.append("mot de passe", password);
+        // formData.append("genie", genie);
 
-        // Request made to the backend api
-        // Send formData object
-        axios.post("https://dept-info.herokuapp.com/etudiant/", formData);
+        // // Request made to the backend api
+        // // Send formData object
+        // axios.post("https://dept-info.herokuapp.com/etudiant/", formData);
     };
 
 
@@ -140,23 +136,23 @@ const AddUser = (props) => {
                                 }
                                 {addStatus === 1 && userStatus === 2 &&
                                 <div className="info__stage">
-                                    <label>Matricule: <em> &#x2a; </em><input type="text" name="Nom_complet" onChange={handleChange}/></label>
-                                    <label>Nom: <em> &#x2a; </em><input type="text" name="Nom_complet" onChange={handleChange}/></label>
-                                    <label>Prénom: <em> &#x2a; </em><input type="text" name="poste" onChange={handleChange}/></label>
-                                    <label>Email: <em> &#x2a; </em><input type="text" name="email" onChange={handleChange}/></label>
-                                    <label>Mot de passe: <em> &#x2a; </em><input type="text" name="telephone" onChange={handleChange}/></label>
+                                    <label>Matricule: <em> &#x2a; </em><input type="text" name="matricule" onChange={change}/></label>
+                                    <label>Nom: <em> &#x2a; </em><input type="text" name="nom" onChange={change}/></label>
+                                    <label>Prénom: <em> &#x2a; </em><input type="text" name="prenom" onChange={change}/></label>
+                                    <label>Email: <em> &#x2a; </em><input type="email" name="email" onChange={change}/></label>
+                                    <label>Mot de passe: <em> &#x2a; </em><input type="password" name="password" onChange={change}/></label>
                                     <label>Genie: <em> &#x2a; </em>
-                                        <select onChange={handleChange}>
-
-                                            <option value="Genie industriel">Génie Industriel</option>
-                                            <option value="Genie mecanique">Génie Mécanique</option>
-                                            <option value="Genie civil">Génie civil</option>
-                                            <option value="Genie electrique">Génie Electrique</option>
-                                            <option value="Genie RT">Génie Réseaux et Télecommunications</option>
-                                            <option value="Genie informatique">Génie Informatique</option>
-                                            <option value="Genie mis">Génie MIS</option>
-                                            <option value="Genie des procedes industriels">Génie des Procédés industriels</option>
-                                            <option value="Genie mineral">Génie Minéral</option>
+                                        <select name="genie" onChange={change}>
+                                            <option value="null">-</option>  
+                                            <option value="Genie_Industriel">Génie Industriel</option>
+                                            <option value="Genie_Mecanique">Génie Mécanique</option>
+                                            <option value="Genie_Civil">Génie civil</option>
+                                            <option value="Genie_Electrique">Génie Electrique</option>
+                                            <option value="Genie_RT">Génie Réseaux et Télecommunications</option>
+                                            <option value="Genie_Informatique">Génie Informatique</option>
+                                            <option value="Genie_Mis">Génie MIS</option>
+                                            <option value="Genie_Procedes_Industriels">Génie des Procédés industriels</option>
+                                            <option value="Genie_Mineral">Génie Minéral</option>
 
                                         </select>
                                     </label>
@@ -165,24 +161,24 @@ const AddUser = (props) => {
 
                                 {addStatus === 1 && userStatus === 1 &&
                                 <div className="info__stage">
-                                    <label>Nom: <em> &#x2a; </em><input type="text" name="Nom_complet" onChange={handleChange}/></label>
-                                    <label>Prénom: <em> &#x2a; </em><input type="text" name="poste" onChange={handleChange}/></label>
-                                    <label>Email: <em> &#x2a; </em><input type="text" name="email" onChange={handleChange}/></label>
-                                    <label>Mot de passe: <em> &#x2a; </em><input type="text" name="telephone" onChange={handleChange}/></label>
+                                    <label>Nom: <em> &#x2a; </em><input type="text" name="nom" onChange={change}/></label>
+                                    <label>Prénom: <em> &#x2a; </em><input type="text" name="prenom" onChange={change}/></label>
+                                    <label>Email: <em> &#x2a; </em><input type="email" name="email" onChange={change}/></label>
+                                    <label>Mot de passe: <em> &#x2a; </em><input type="password" name="password" onChange={change}/></label>
                                     <label>Specialité: <em> &#x2a; </em>
-                                        <select onChange={handleChange}>
-
+                                        <select name="specialite" onChange={change} required>
+                                            <option value="null">-</option>  
                                             <option value="Informatique">Informatique</option>
-                                            <option value="Docteur">electrotechique</option>
-                                            <option value="Ingénieur">Mathematiques</option>
+                                            <option value="Electrotechnique">Electrotechique</option>
+                                            <option value="Mathematiques">Mathematiques</option>
                                         </select>
                                     </label>
                                     <label>Grade: <em> &#x2a; </em>
-                                        <select onChange={handleChange}>
-
+                                        <select name="grade" onChange={change} required> 
+                                            <option value="null">-</option>  
                                             <option value="Professeur">Professeur</option>
                                             <option value="Docteur">Docteur</option>
-                                            <option value="Ingénieur">Ingénieur</option>
+                                            <option value="Ingenieur">Ingénieur</option>
                                         </select>
                                     </label>
 

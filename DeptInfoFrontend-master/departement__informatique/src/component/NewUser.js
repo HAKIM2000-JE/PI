@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Radio from '@material-ui/core/Radio';
@@ -9,6 +9,8 @@ import '../Style/NewUsers.css';
 import useForceUpdate from "use-force-update";
 import axios from "axios";
 import NewUserModal from "./NewUserModal";
+import Table from './ShowTable';
+
 
 function getModalStyle() {
     const top = 50;
@@ -41,7 +43,8 @@ const NewUser = (props) => {
 
 
     const [addUser, setAddUser] = useState(false);
-
+    const [data, setData] = useState([]);
+    const [tableEnseignant, setTableEnseignant] = useState(false);
     const openModalAdd = () => {
         setAddUser(true);
     };
@@ -49,18 +52,101 @@ const NewUser = (props) => {
         setAddUser(false);
     };
 
+    const afficherEnseignant = () => {
+        axios.get("http://localhost:8081/enseignant/")
+        .then(res => {
+            //console.log(res.data[0].titre);
+            //Parse if it a json object
+            const myData = [];
+            res.data.forEach((enseignant) => myData.push(enseignant));
+            console.log(myData);
+            setData(myData);
+        });
+        setTableEnseignant(true);
+    };
 
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = React.useState(getModalStyle);
+    
+    useEffect(() => {
+        // Met à jour le titre du document via l’API du navigateur
+        
+      });
+
+
+    const columns = React.useMemo(
+        () => [
+          {
+            Header: 'Nom complet',
+            columns: [
+              {
+                Header: 'Nom',
+                accessor: 'nom',
+              },
+              {
+                Header: 'Prenom',
+                accessor: 'prenom',
+              },
+            ],
+          },
+          {
+            Header: 'Info',
+            columns: [
+              {
+                Header: 'Email',
+                accessor: 'email',
+              },
+              {
+                Header: 'Specialite',
+                accessor: 'specialite',
+              },
+              {
+                Header: 'Grade',
+                accessor: 'grade',
+              },
+            ],
+          },
+          {
+            Header: 'Action',
+            accessor: 'action',
+          },
+        ],
+        []
+      );
+    
+      const dataTable = [
+        {
+            "nom": "rifai",
+            "prenom": "nouh",
+            "email": "test",
+            "specialite": "test",
+            "grade": "test",
+          },
+          {
+            "nom": "rifaiii",
+            "prenom": "nouh",
+            "email": "test",
+            "specialite": "test",
+            "grade": "test",
+          }
+      ]
+          
+      
+    
 
     return (
         <div>
             <button onClick={openModalAdd}>
                 Ajouter un utilisateur
             </button>
-
-
+            <button onClick={afficherEnseignant}>
+                Afficher les enseignants
+            </button>
+            
+            <div>
+                {tableEnseignant && (<Table columns={columns} data={data} />)}
+            </div>
 
             <div>
                 {addUser && (<NewUserModal closeModal={closeModalAdd}/>)}
