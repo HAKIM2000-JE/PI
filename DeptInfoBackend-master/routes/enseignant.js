@@ -1,12 +1,81 @@
-const express = require('express');
-const router = express.Router();
+const Enseignant = require('../models/enseignant');
+const db = require('../models');
 
-const enseignantCtrl = require('../controllers/enseignant');
+exports.createEnseignant = (req, res, next) => {
 
-router.get('/', enseignantCtrl.getAllEnseignant);
-router.post('/', enseignantCtrl.createEnseignant);
-router.get('/:id', enseignantCtrl.getOneEnseignant);
-router.put('/:id', enseignantCtrl.modifyEnseignant);
-router.delete('/:id', enseignantCtrl.deleteEnseignant);
+    db.enseignant.create({
+        nom: req.body.nom,
+        prenom: req.body.prenom,
+        EnseignantPassword: req.body.password,
+        email: req.body.email,
+        specialite: req.body.specialite,
+        grade: req.body.grade,
+        
+    }).then(submittedEnseignant => console.log(submittedEnseignant));
+    
+    res.json({result: 'ok'});
+};
 
-module.exports = router;
+exports.getOneEnseignant = (req, res, next) => {
+    Enseignant().findOne({
+        _id: req.params.id
+    }).then(
+        (enseignant) => {
+            res.status(200).json(enseignant);
+        }
+    ).catch(
+        (error) => {
+            res.status(404).json({
+                error: error
+            });
+        }
+    );
+};
+
+exports.modifyEnseignant = (req, res, next) => {
+    const enseignant = new Enseignant({
+        _id: req.params.id,
+        nom: req.body.nom,
+        prenom: req.body.prenom,
+        enseignantPassword: req.body.enseignantPassword,
+        email: req.body.email,
+        specialite: req.body.specialite,
+        grade: req.body.grade,
+        EnseignantId: req.body.userId
+    });
+    Enseignant().updateOne({_id: req.params.id}, enseignant).then(
+        () => {
+            res.status(201).json({
+                message: 'enseignant updated successfully!'
+            });
+        }
+    ).catch(
+        (error) => {
+            res.status(400).json({
+                error: error
+            });
+        }
+    );
+};
+
+exports.deleteEnseignant = (req, res, next) => {
+    Enseignant.deleteOne({_id: req.params.id}).then(
+        () => {
+            res.status(200).json({
+                message: 'Deleted!'
+            });
+        }
+    ).catch(
+        (error) => {
+            res.status(400).json({
+                error: error
+            });
+        }
+    );
+};
+
+exports.getAllEnseignant = (req, res, next) => {
+    db.enseignant.findAll().then(enseignants => res.send(enseignants))
+
+    
+};
