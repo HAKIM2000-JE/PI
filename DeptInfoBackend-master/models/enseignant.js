@@ -9,9 +9,6 @@ module.exports = (sequelize, DataTypes) => {
         EnseignantPassword: {
             type: DataTypes.STRING
         },
-        idCreateur: {
-            type: DataTypes.INTEGER
-        },
         nom: {
             type: DataTypes.STRING
         },
