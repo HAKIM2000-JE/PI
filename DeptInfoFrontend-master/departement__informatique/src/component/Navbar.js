@@ -48,7 +48,7 @@ function Navbar({ Accueil, Notes, Informations, Documents, Stage}) {
                             </div>
                         </li>
 
-                        <Link to="/notes">
+                        <Link to="/NewUser">
                             <li class={"nav-item " + Notes}>
                                 <a class="nav-link" href="#">Documents </a>
                             </li>

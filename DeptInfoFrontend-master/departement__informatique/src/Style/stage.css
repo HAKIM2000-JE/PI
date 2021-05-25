@@ -1,0 +1,147 @@
+button {
+    display: block;
+    float: right;
+    line-height: 24pt;
+    padding: 0 20px;
+    border: none;
+    color: white;
+    letter-spacing: 2px;
+    transition: .2s all ease-in-out;
+    border-bottom: 2px solid transparent;
+    outline: none;
+}
+h2 {
+    font-weight: bold;
+    max-width:800px;
+    margin:20px 20px;
+    font-size: 26pt;
+    text-decoration: underline;
+}
+.sidebar {
+    margin-right: -320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 300px;
+    float: left;
+    overflow: hidden;
+    background: rgba(215, 215, 215, 0.5);
+    color: #eee;
+    height: 250px;
+}
+
+.sidebar__link {
+    display: block;
+    text-align: center;
+    margin: 15px auto;
+    width: 80%;
+    height: 100px;
+    text-decoration: none;
+    color: black;
+    background-color: #FFF;
+    border: none ;
+    border-radius: 5px;
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.35);
+}
+
+.sidebar__link:hover, .currentPage {
+    background-color: #f2f2f2;
+    text-decoration: none;
+    color: black;
+    border: none ;
+    border-radius: 5px;
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.35);
+}
+
+.main {
+    margin-left: 320px;
+    overflow: auto;
+    margin-bottom: 100px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+tr:nth-child(even){
+    background-color: #dddddd;
+}
+
+.btn-new__stage  {
+    justify-content: flex-end;
+    margin-right: 50px;
+}
+
+/*responsive*/
+@media only screen and (max-width: 768px) {
+    .sidebar {
+        /*display: none;*/
+        width: 80%;
+        margin: auto;
+    }
+    .main {
+        margin-left: 10px;
+    }
+    .contain {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+/* new stage */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    padding: 50px 50px;
+    max-width: 800px;
+}
+h3 {
+    font-weight: bold;
+    font-size: 20pt;
+    line-height: 24pt;
+    margin: 0 0 .5em 0;
+}
+
+label, input, textarea {
+    display: block;
+    width: 100%;
+    font-size: 12pt;
+    line-height: 24pt;
+}
+
+input {
+    margin-bottom: 24pt;
+    border: none;
+    border-radius: 2px;
+    padding-left: 5px;
+    outline: none;
+}
+
+em {
+    color: #f45702;
+    font-weight: bold;
+}
+
+.btn__submit {
+    background-color: rgba(22, 155, 213, 1);
+    color: #fff;
+    padding: 5px 20px;
+    border-radius: 4px;
+    border: 2px solid rgba(22, 155, 213, 1);
+    cursor: pointer;
+    float: right;
+    margin-left: 30px;
+    margin-bottom: 3px;
+}
+
+/*Informations personnelles */

@@ -12,6 +12,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var documentRouter = require('./routes/document');
 var commentaireRouter = require('./routes/commentaire');
+var enseignantRouter = require('./routes/enseignant');
+var etudiantRouter = require('./routes/etudiant');
 var uploadRouter = require('./routes/upload');
 var app = express();
 
@@ -36,6 +38,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/document', documentRouter);
 app.use('/commentaire', commentaireRouter);
+app.use('/enseignant', enseignantRouter);
+app.use('/etudiant', etudiantRouter);
 // app.use('/upload', uploadRouter);
 
 app.post('/upload', (req, res, next) => {

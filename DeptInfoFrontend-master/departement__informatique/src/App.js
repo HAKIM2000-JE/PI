@@ -22,7 +22,7 @@ import Note from './component/Note';
 import Notes from './component/Notes';
 import NoteDetail from './component/NoteDetail';
 import NouveauDocument from './component/NouveauDocument';
-
+import NewUser from './component/NewUser';
 
 
 function App() {
@@ -49,6 +49,14 @@ function App() {
             <Footer />
 
           </Route>
+           <Route path="/NewUser">
+               <Navbar />
+               <NewUser />
+
+
+               <Footer />
+
+           </Route>
 
           <Route path="/Notes">
             <Navbar Tableau="link_active" />
