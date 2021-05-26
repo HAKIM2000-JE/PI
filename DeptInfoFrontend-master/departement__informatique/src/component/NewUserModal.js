@@ -67,8 +67,14 @@ const AddUser = (props) => {
 
         // Request made to the backend api
         // Send formData object
-        axios.post("http://localhost:8081/enseignant/", formDataAxios);
-    };
+        axios.post("http://localhost:8081/enseignant/add", formDataAxios)
+
+            .then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        };
     
     // const handleChange1 = (event) => {
     //     setValue1(event.target.value);
@@ -136,11 +142,11 @@ const AddUser = (props) => {
                                 }
                                 {addStatus === 1 && userStatus === 2 &&
                                 <div className="info__stage">
-                                    <label>Matricule: <em> &#x2a; </em><input type="text" name="matricule" onChange={change}/></label>
-                                    <label>Nom: <em> &#x2a; </em><input type="text" name="nom" onChange={change}/></label>
-                                    <label>Prénom: <em> &#x2a; </em><input type="text" name="prenom" onChange={change}/></label>
-                                    <label>Email: <em> &#x2a; </em><input type="email" name="email" onChange={change}/></label>
-                                    <label>Mot de passe: <em> &#x2a; </em><input type="password" name="password" onChange={change}/></label>
+                                    <label>Matricule: <em> &#x2a; </em><input type="text" value={formdata.matricule} name="matricule" onChange={change}/></label>
+                                    <label>Nom: <em> &#x2a; </em><input type="text" name="nom" value={formdata.nom} onChange={change}/></label>
+                                    <label>Prénom: <em> &#x2a; </em><input type="text" name="prenom" value={formdata.prenom} onChange={change}/></label>
+                                    <label>Email: <em> &#x2a; </em><input type="email" name="email" value={formdata.email} onChange={change}/></label>
+                                    <label>Mot de passe: <em> &#x2a; </em><input type="password" name="password" value={formdata.password} onChange={change}/></label>
                                     <label>Genie: <em> &#x2a; </em>
                                         <select name="genie" onChange={change}>
                                             <option value="null">-</option>  
@@ -160,35 +166,55 @@ const AddUser = (props) => {
                                 }
 
                                 {addStatus === 1 && userStatus === 1 &&
-                                <div className="info__stage">
-                                    <label>Nom: <em> &#x2a; </em><input type="text" name="nom" onChange={change}/></label>
-                                    <label>Prénom: <em> &#x2a; </em><input type="text" name="prenom" onChange={change}/></label>
-                                    <label>Email: <em> &#x2a; </em><input type="email" name="email" onChange={change}/></label>
-                                    <label>Mot de passe: <em> &#x2a; </em><input type="password" name="password" onChange={change}/></label>
-                                    <label>Specialité: <em> &#x2a; </em>
-                                        <select name="specialite" onChange={change} required>
-                                            <option value="null">-</option>  
-                                            <option value="Informatique">Informatique</option>
-                                            <option value="Electrotechnique">Electrotechique</option>
-                                            <option value="Mathematiques">Mathematiques</option>
-                                        </select>
-                                    </label>
-                                    <label>Grade: <em> &#x2a; </em>
-                                        <select name="grade" onChange={change} required> 
-                                            <option value="null">-</option>  
-                                            <option value="Professeur">Professeur</option>
-                                            <option value="Docteur">Docteur</option>
-                                            <option value="Ingenieur">Ingénieur</option>
-                                        </select>
-                                    </label>
 
+                                     <form>
+                            <div class="form-group">
+                                    <label for="exampleInputEmail1">Nom</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={change}  />
+                                    <label for="exampleInputEmail1">Prenom</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={change}  />
+                                    <label for="exampleInputEmail1">Email address  <em> &#x2a; </em></label>
+                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={change}/>
+                                <label for="exampleInputEmail1">Mot de Passe</label>
+                                        <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={change} />
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group">
+                                        <label>Specialité: <em> &#x2a; </em>     </label>
+                                            <select name="specialite" onChange={change} required>
+                                                <option value="null">-</option>
+                                                <option value="Informatique">Informatique</option>
+                                                <option value="Electrotechnique">Electrotechique</option>
+                                                <option value="Mathematiques">Mathematiques</option>
+                                            </select>
+                                    
+
+
+                                        <label>Grade: <em> &#x2a; </em>    </label>
+                                           <select name="grade" onChange={change} required>
+                                                <option value="null">-</option>
+                                                <option value="Professeur">Professeur</option>
+                                                <option value="Docteur">Docteur</option>
+                                                <option value="Ingenieur">Ingénieur</option>
+                                            </select>
+                                      
+                                 </div>
+                                    
+                                        
+                             </form>
+
+                                    
+                                }
+                                   
+
+                               
+                                   <hr />
+                                <div className="row row-btn">
+
+                                    <input type="button" className="annuler" onClick={props.closeModal} value="Annuler" />
+                                    <input type="button" className="submit" value="Ajouter" onClick={userStatus === 1 ? addEnseignant : addEtudiant}/>
 
                                 </div>
-                                }
-
-
-                                <button className="btn__cancel" onClick={props.closeModal}>Annuler</button>
-                                <button className="btn__submit" onClick={userStatus===1?addEnseignant:addEtudiant}>Ajouter</button>
                             </form>
                         </div>
 
