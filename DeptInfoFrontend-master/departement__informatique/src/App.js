@@ -22,7 +22,11 @@ import Note from './component/Note';
 import Notes from './component/Notes';
 import NoteDetail from './component/NoteDetail';
 import NouveauDocument from './component/NouveauDocument';
-import NewUser from './component/NewUser';
+import Stages from './component/Stages';
+import AdminCards from './component/AdminCards';
+
+import User from './component/User';
+
 
 
 function App() {
@@ -49,18 +53,19 @@ function App() {
             <Footer />
 
           </Route>
-           <Route path="/NewUser">
-               <Navbar />
-               <NewUser />
-
-
-               <Footer />
-
-           </Route>
 
           <Route path="/Notes">
             <Navbar Tableau="link_active" />
             <Notes />
+
+
+            <Footer />
+
+          </Route>
+
+          <Route path="/Stages">
+            <Navbar />
+            <Stages/>
 
 
             <Footer />
@@ -78,7 +83,7 @@ function App() {
           </Route>
 
           <Route path="/NoteDetail/:id">
-            <Navbar />
+            <Navbar Notes="active" />
             <NoteDetail />
 
 
@@ -88,10 +93,36 @@ function App() {
 
        
 
-            
+          
+
+
+
+          <Route path="/admin">
+
+
+            <Navbar Acceuil="active" />
+            <Banner />
+
+            <AdminCards />
+
+            <Footer />
+
+          </Route>
+
+
+          <Route path="/NewUser">
+            <Navbar />
+            <User />
+
+
+            <Footer />
+
+          </Route>
 
             <Route>
-            <Navbar type="trasparent" Acceuil="link_active" />
+
+            
+            <Navbar Acceuil="active" />
             <Banner />
           
             <Cards />
@@ -99,6 +130,9 @@ function App() {
             <Footer />
 
          </Route>
+
+
+
        </Switch>
       </Router>
       
