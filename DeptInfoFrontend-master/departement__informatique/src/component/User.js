@@ -45,6 +45,8 @@ const NewUser = (props) => {
     const [addUser, setAddUser] = useState(false);
     const [data, setData] = useState([]);
     const [tableEnseignant, setTableEnseignant] = useState(false);
+    const [tableEtudiant, setTableEtudiant] = useState(false);
+
     const openModalAdd = () => {
         setAddUser(true);
     };
@@ -65,6 +67,22 @@ const NewUser = (props) => {
         setTableEnseignant(true);
     };
 
+
+  const afficherEtudiant = () => {
+    axios.get("http://localhost:8081/etudiant/")
+      .then(res => {
+        //console.log(res.data[0].titre);
+        //Parse if it a json object
+        const myData = [];
+        res.data.forEach((enseignant) => myData.push(enseignant));
+        console.log(myData);
+        setData(myData);
+        console.log(data)
+      });
+    setTableEtudiant(true);
+  };
+
+
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = React.useState(getModalStyle);
@@ -75,7 +93,7 @@ const NewUser = (props) => {
       });
 
 
-    const columns = React.useMemo(
+    const columnsEnseignant = React.useMemo(
         () => [
           {
             Header: 'Nom complet',
@@ -114,6 +132,46 @@ const NewUser = (props) => {
         ],
         []
       );
+
+  const columnsEtudiant = React.useMemo(
+    () => [
+      {
+        Header: 'Nom complet',
+        columns: [
+          {
+            Header: 'Nom',
+            accessor: 'nom',
+          },
+          {
+            Header: 'Prenom',
+            accessor: 'prenom',
+          },
+        ],
+      },
+      {
+        Header: 'Info',
+        columns: [
+          {
+            Header: 'Email',
+            accessor: 'email',
+          },
+          {
+            Header: 'Maricule',
+            accessor: 'matricule',
+          },
+          {
+            Header: 'Genie',
+            accessor: 'genie',
+          },
+        ],
+      },
+      {
+        Header: 'Action',
+        accessor: 'action',
+      },
+    ],
+    []
+  );
     
       const dataTable = [
         {
@@ -143,10 +201,18 @@ const NewUser = (props) => {
             <button onClick={afficherEnseignant}>
                 Afficher les enseignants
             </button>
+
+        <button onClick={afficherEtudiant}>
+          Afficher les etudiants
+        </button>
             
             <div>
-                {tableEnseignant && (<Table columns={columns} data={data} />)}
+          {tableEnseignant && (<Table columns={columnsEnseignant} data={data} />)}
             </div>
+
+        <div>
+          {tableEtudiant && (<Table columns={columnsEtudiant} data={data} />)}
+        </div>
 
             <div>
                 {addUser && (<NewUserModal closeModal={closeModalAdd}/>)}
