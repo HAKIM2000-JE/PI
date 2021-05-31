@@ -2,7 +2,6 @@ const Enseignant = require('../models/enseignant');
 
 exports.createEnseignant = (req, res, next) => {
     const enseignant = new Enseignant({
-        idCreateur: req.body.idCreateur,
         nom: req.body.nom,
         prenom: req.body.prenom,
         enseignantPassword: req.body.enseignantPassword,

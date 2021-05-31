@@ -65,6 +65,8 @@ const NewUser = (props) => {
             setData(myData);
         });
         setTableEnseignant(true);
+        setTableEtudiant(false);
+
     };
 
 
@@ -74,12 +76,12 @@ const NewUser = (props) => {
         //console.log(res.data[0].titre);
         //Parse if it a json object
         const myData = [];
-        res.data.forEach((enseignant) => myData.push(enseignant));
-        console.log(myData);
+        res.data.forEach((etudiant) => myData.push(etudiant));
         setData(myData);
-        console.log(data)
       });
     setTableEtudiant(true);
+    setTableEnseignant(false);
+
   };
 
 

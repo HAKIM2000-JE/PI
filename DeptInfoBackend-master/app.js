@@ -14,7 +14,11 @@ var documentRouter = require('./routes/document');
 var commentaireRouter = require('./routes/commentaire');
 var enseignantRouter = require('./routes/enseignant');
 var etudiantRouter = require('./routes/etudiant');
+var departementRouter = require('./routes/departement');
+var filiereRouter = require('./routes/filiere');
+
 var uploadRouter = require('./routes/upload');
+
 var app = express();
 
 // view engine setup
@@ -40,6 +44,9 @@ app.use('/document', documentRouter);
 app.use('/commentaire', commentaireRouter);
 app.use('/enseignant', enseignantRouter);
 app.use('/etudiant', etudiantRouter);
+app.use('/departement', departementRouter);
+app.use('/filiere', filiereRouter);
+
 // app.use('/upload', uploadRouter);
 
 app.post('/upload', (req, res, next) => {

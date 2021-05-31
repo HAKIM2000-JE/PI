@@ -10,62 +10,68 @@ function Navbar({ Accueil, Notes, Informations, Documents, Stage}) {
     return (
        
         <div>
-            <nav class={"navbar navbar-expand-lg navbar-light bg-light"}>
+            <nav className={"navbar navbar-expand-lg navbar-light bg-light"}>
              
-                <a class="navbar-brand" href="#"> <img src={logo} alt=""  /></a>
+                <a className="navbar-brand" href="#"> <img src={logo} alt=""  /></a>
            
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto links">
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul className="navbar-nav mr-auto links">
 
                       <Link to="/">
-                            <li class={"nav-item "+Accueil}>
-                                <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+                            <li className={"nav-item "+Accueil}>
+                                <span className="nav-link" href="#">Accueil <span className="sr-only">(current)</span></span>
                             </li>
                       </Link>
                         
 
                         <Link to="/notes">
-                            <li class={"nav-item " + Notes}>
-                                <a class="nav-link" href="#">Notes</a>
+                            <li className={"nav-item " + Notes}>
+                                <span className="nav-link" href="#">Notes</span>
                             </li>
                         </Link>
 
                       
                         
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Informations Utiles
                         </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Personnels administratifs</a>
-                                <a class="dropdown-item" href="#">Corps enseignant</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="">Modules enseignés</a>
+                            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a className="dropdown-item" href="#">Personnels administratifs</a>
+                                <a className="dropdown-item" href="#">Corps enseignant</a>
+                                <div className="dropdown-divider"></div>
+                                <a className="dropdown-item" href="">Modules enseignés</a>
                             </div>
                         </li>
 
                         <Link to="/NewUser">
-                            <li class={"nav-item " + Notes}>
-                                <a class="nav-link" href="#">Documents </a>
+                            <li className={"nav-item " + Notes}>
+                                <span className="nav-link" href="#">Documents </span>
                             </li>
                         </Link>
 
                        
                         <Link to="/notes">
-                            <li class={"nav-item " + Notes}>
-                                <a class="nav-link" href="#">Stage</a>
+                            <li className={"nav-item " + Notes}>
+                                <span className="nav-link" href="#">Stage</span>
+                            </li>
+                        </Link>
+
+                        <Link to="/Dept">
+                            <li className={"nav-item " + Notes}>
+                                <span className="nav-link" href="#">Departement</span>
                             </li>
                         </Link>
                        
                         
                     </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-                            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                    <form className="form-inline my-2 my-lg-0">
+                        <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+                            <button className="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
 </nav>

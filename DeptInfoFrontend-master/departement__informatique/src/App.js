@@ -22,8 +22,12 @@ import Note from './component/Note';
 import Notes from './component/Notes';
 import NoteDetail from './component/NoteDetail';
 import NouveauDocument from './component/NouveauDocument';
-import Stages from './component/Stages';
-import AdminCards from './component/AdminCards';
+import Departement from './component/Departement';
+import Filiere from './component/Filiere';
+import Dept from './component/Dept'
+
+// import Stages from './component/Stages';
+// import AdminCards from './component/AdminCards';
 
 import User from './component/User';
 
@@ -63,14 +67,14 @@ function App() {
 
           </Route>
 
-          <Route path="/Stages">
+          {/* <Route path="/Stages">
             <Navbar />
             <Stages/>
 
 
             <Footer />
 
-          </Route>
+          </Route> */}
 
 
           <Route path="/NouvelleNotes">
@@ -97,7 +101,7 @@ function App() {
 
 
 
-          <Route path="/admin">
+          {/* <Route path="/admin">
 
 
             <Navbar Acceuil="active" />
@@ -107,10 +111,10 @@ function App() {
 
             <Footer />
 
-          </Route>
+          </Route> */}
 
 
-          <Route path="/NewUser">
+          <Route path="/User">
             <Navbar />
             <User />
 
@@ -119,9 +123,26 @@ function App() {
 
           </Route>
 
-            <Route>
+          <Route path="/Departement">
+            <Navbar />
+            <Departement />
+            <Footer />
+          </Route>
 
-            
+          <Route path="/Filiere">
+            <Navbar />
+            <Filiere />
+            <Footer />
+          </Route>
+
+          <Route path="/Dept">
+            <Navbar />
+            <Dept />
+            <Footer />
+          </Route>
+
+
+            <Route>
             <Navbar Acceuil="active" />
             <Banner />
           

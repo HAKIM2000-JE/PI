@@ -6,12 +6,12 @@ function Footer() {
     return (
         <div className="footer">
             <footer>
-                <div class="container-fluid padding">
-                    <div class="row text-center">
-                        <div class="col-md-4">
+                <div className="container-fluid padding">
+                    <div className="row text-center">
+                        <div className="col-md-4">
 
 
-                            <hr class="light" id="lk" />
+                            <hr className="light" id="lk" />
                             <img src={logo} className="logo__img"  alt=""/>
                             <p id="pk">Département Informatique EMI</p>
 
@@ -19,7 +19,7 @@ function Footer() {
 
                         </div>
                         
-                        <div class="col-md-4">
+                        <div className="col-md-4">
                             <hr className="light"  />
                             <div className="" id="lk">
                                 <p>BP 765, Avenue Ibn Sina Agdal Rabat Maroc</p>

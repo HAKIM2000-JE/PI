@@ -24,10 +24,10 @@ router.post('/add', function (req, res, next) {
     db.etudiant.create({
         nom: req.body.nom,
         prenom: req.body.prenom,
-        EtudinantPassword: req.body.password,
+        EtudiantPassword: req.body.password,
         email: req.body.email,
-        matricule: req.body.specialite,
-        genie: req.body.grade,
+        matricule: req.body.matricule,
+        genie: req.body.genie,
 
     }).then((doc) => res.send(doc));
 })

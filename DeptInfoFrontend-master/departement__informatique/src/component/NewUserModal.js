@@ -85,19 +85,25 @@ const AddUser = (props) => {
 
     const addEtudiant = (event)=>{
 
-        // // Create an object of formData
-        // const formData = new FormData();
-        // // Update the formData object
-        // formData.append("matricule",matricule);
-        // formData.append("nom",nom);
-        // formData.append('prenom', prenom);
-        // formData.append('email', email);
-        // formData.append("mot de passe", password);
-        // formData.append("genie", genie);
+        // Create an object of formData
+        const formDataAxios = new FormData();
+        // Update the formData object
+        formDataAxios.append("nom",formdata.nom);
+        formDataAxios.append('prenom', formdata.prenom);
+        formDataAxios.append('email', formdata.email);
+        formDataAxios.append("password", formdata.password);
+        formDataAxios.append("genie", formdata.genie);
+        formDataAxios.append("matricule", formdata.matricule);
 
-        // // Request made to the backend api
-        // // Send formData object
-        // axios.post("https://dept-info.herokuapp.com/etudiant/", formData);
+        // Request made to the backend api
+        // Send formData object
+        axios.post("http://localhost:8081/etudiant/add", formDataAxios)
+
+            .then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error);
+            });
     };
 
 
@@ -142,11 +148,11 @@ const AddUser = (props) => {
                                 }
                                 {addStatus === 1 && userStatus === 2 &&
                                 <div className="info__stage">
-                                    <label>Matricule: <em> &#x2a; </em><input type="text" value={formdata.matricule} name="matricule" onChange={change}/></label>
-                                    <label>Nom: <em> &#x2a; </em><input type="text" name="nom" value={formdata.nom} onChange={change}/></label>
-                                    <label>Prénom: <em> &#x2a; </em><input type="text" name="prenom" value={formdata.prenom} onChange={change}/></label>
-                                    <label>Email: <em> &#x2a; </em><input type="email" name="email" value={formdata.email} onChange={change}/></label>
-                                    <label>Mot de passe: <em> &#x2a; </em><input type="password" name="password" value={formdata.password} onChange={change}/></label>
+                                    <label>Matricule: <em> &#x2a; </em><input type="text"  name="matricule" onChange={change}/></label>
+                                    <label>Nom: <em> &#x2a; </em><input type="text" name="nom"  onChange={change}/></label>
+                                    <label>Prénom: <em> &#x2a; </em><input type="text" name="prenom"  onChange={change}/></label>
+                                    <label>Email: <em> &#x2a; </em><input type="email" name="email"  onChange={change}/></label>
+                                    <label>Mot de passe: <em> &#x2a; </em><input type="password" name="password"  onChange={change}/></label>
                                     <label>Genie: <em> &#x2a; </em>
                                         <select name="genie" onChange={change}>
                                             <option value="null">-</option>  
@@ -212,7 +218,7 @@ const AddUser = (props) => {
                                 <div className="row row-btn">
 
                                     <input type="button" className="annuler" onClick={props.closeModal} value="Annuler" />
-                                    <input type="button" className="submit" value="Ajouter" onClick={userStatus === 1 ? addEnseignant : addEtudiant}/>
+                                    <input type="submit" className="submit" value="Ajouter" onClick={userStatus === 1 ? addEnseignant : addEtudiant}/>
 
                                 </div>
                             </form>

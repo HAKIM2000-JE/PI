@@ -9,9 +9,6 @@ module.exports = (sequelize, DataTypes) => {
         matricule: {
             type: DataTypes.STRING
         },
-        idCreateur: {
-            type: DataTypes.INTEGER
-        },
         nom: {
             type: DataTypes.STRING
         },
