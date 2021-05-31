@@ -24,7 +24,7 @@ const NewDepartement = (props) => {
       prenom:"nouh",
       email:"admin@admin.com",
     };
-    const [configurerFiliere, setConfigurerFiliere] = useState(false);
+    const [configurerFiliere, setConfigurerFiliere] = useState(true);
     const [data, setData] = useState([]);
     const [tableDepartement, setTableDepartement] = useState(false);
     const [maFiliere, setMaFiliere] = useState(false);
