@@ -75,6 +75,15 @@ const ConfigurerFiliereStep1 = (props) => {
         []
       );
 
+
+      const change = ()=>{
+
+      }
+
+  const addDepartement = () => {
+
+  }
+
    
 //extract params
 
@@ -96,6 +105,31 @@ const ConfigurerFiliereStep1 = (props) => {
 
     return (
         <div>
+        <form id="simple-modal-description">
+
+          <h1>Etape 1</h1>
+          <hr />
+
+
+          <div className="info__stage">
+            <label>Nom: <em> &#x2a; </em><input type="text" name="nom" onChange={change}  /></label>
+            <label>Abreviation: <em> &#x2a; </em><input type="text" name="abreviation" onChange={change} /></label>
+            <label>Chef de departement: <em> &#x2a; </em>
+              <select name="enseignant" onChange={change}>
+                <option value="null">-</option>
+                {data.map((e, i) => (
+                  <option key={e.EnseignantId} value={e.EnseignantId}>{e.EnseignantId} - {e.nom} {e.prenom}</option>
+                ))}
+              </select>
+            </label>
+          </div>
+        
+
+         
+
+
+        
+        </form>
             
         </div>
     );
