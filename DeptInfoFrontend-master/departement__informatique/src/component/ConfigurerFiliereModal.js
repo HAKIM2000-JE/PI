@@ -9,6 +9,12 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 
 
+import { Steps, Step } from "react-step-builder";
+import Step1 from "./ConfigurerFiliereStep1";
+import Step2 from "./ConfigurerFiliereStep2";
+import Step3 from "./ConfigurerFiliereStep3";
+
+
 const ConfigurerFiliere = (props) => {
 
 
@@ -72,8 +78,33 @@ const ConfigurerFiliere = (props) => {
                 console.log(error);
             });
         };
-    
 
+    const Navigation = (props) => {
+        return (
+            <div style={{ 'top': '70%' ,'left':'60%', 'position': 'relative'}} >
+                <button  className="btn btn-outline-primary" style={{'margin':'50px'}} onClick={props.prev}>Retour</button>
+                 
+                <button className="btn btn-primary" onClick={props.next}>Suivant</button>
+            </div>
+        );
+    }
+
+    const Before = (props) => {
+        return <span>This component will be rendered before the Step components in every step</span>
+    }
+
+    const After = (props) => {
+        return <span>This component will be rendered after the Step components in every step</span>
+    }
+
+    const config = {
+      //   before: Before, a React component with special props provided automatically
+       // after: After,  a React component with special props provided automatically
+        navigation: {
+            component: Navigation, // a React component with special props provided automatically
+            location: "before" // or after
+        }
+    }
 
     return (
         <div>
@@ -84,13 +115,13 @@ const ConfigurerFiliere = (props) => {
                 onRequestClose={props.closeModal}
                 ariaHideApp={false}
             >
-                <div className="modal-add-doc">
+                {/*<div className="modal-add-doc">
                     <div className="header-add-doc">
                         <h2>Configurer Ma Filiere</h2>
                     </div>
                     <hr/>
                     <div className="content">
-                    {/* <form id="simple-modal-description">
+                    { <form id="simple-modal-description">
                                 
                        
                                 <div className="info__stage">
@@ -106,6 +137,24 @@ const ConfigurerFiliere = (props) => {
                                     </label>
                                 </div> 
                                    <hr />
+
+
+                            <div className="info__stage">
+                                <label>Nom: <em> &#x2a; </em><input type="text" name="nom" onChange={change} /></label>
+                                <label>Abreviation: <em> &#x2a; </em><input type="text" name="abreviation" onChange={change} /></label>
+                                <label>Chef de departement: <em> &#x2a; </em>
+                                    <select name="enseignant" onChange={change}>
+                                        <option value="null">-</option>
+                                        {data.map((e, i) => (
+                                            <option key={e.EnseignantId} value={e.EnseignantId}>{e.EnseignantId} - {e.nom} {e.prenom}</option>
+                                        ))}
+                                    </select>
+                                </label>
+                            </div>
+
+
+
+
                              <div className="row row-btn">
 
                                     <input type="button" className="annuler" onClick={props.closeModal} value="Annuler" />
@@ -113,7 +162,7 @@ const ConfigurerFiliere = (props) => {
 
                                 </div> 
                             </form>
-                         */}
+                         }
                             <div>
                             {etape === 1
                                 ? ("Etape" + etape)
@@ -137,7 +186,16 @@ const ConfigurerFiliere = (props) => {
                         </div>
                         
                     </div>
-                </div>
+                                </div>*/
+                    <Steps config={config}>
+                        <Step component={Step1} />
+                        <Step component={Step2} />
+                        <Step component={Step3} />
+                    
+                         
+                    </Steps>
+                            
+                            }
             </Modal>
 
         </div>
