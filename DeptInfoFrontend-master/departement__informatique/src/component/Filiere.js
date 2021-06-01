@@ -51,8 +51,8 @@ const Filiere = (props) => {
             accessor: 'abreviation',
           },
           {
-            Header: 'Chef de filiere',
-            accessor: 'chefFiliere',
+            Header: 'ID Chef de filiere',
+            accessor: 'chefFiliereId',
           },
           {
             Header: 'Action',

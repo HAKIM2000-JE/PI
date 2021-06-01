@@ -112,20 +112,15 @@ const ConfigurerFiliereStep1 = (props) => {
 
 
           <div className="info__stage">
-            <label>Nom: <em> &#x2a; </em><input type="text" name="nom" onChange={change}  /></label>
-            <label>Abreviation: <em> &#x2a; </em><input type="text" name="abreviation" onChange={change} /></label>
-            <label>Chef de departement: <em> &#x2a; </em>
-              <select name="enseignant" onChange={change}>
-                <option value="null">-</option>
-                {data.map((e, i) => (
-                  <option key={e.EnseignantId} value={e.EnseignantId}>{e.EnseignantId} - {e.nom} {e.prenom}</option>
-                ))}
-              </select>
-            </label>
+            <label>Comp acquises: <em> &#x2a; </em><input type="text" name="compAcquises" onChange={change}  /></label>
+            <label>Retombees: <em> &#x2a; </em><input type="text" name="retombees" onChange={change} /></label>
           </div>
-        
-
-         
+                  
+          <div className="btn">
+            <input type="button" className="annuler" value="Annuler" />
+            <input type="button" className="submit" value="Suivant" onClick={props.nextStep}/>
+          </div>
+                  
 
 
         
