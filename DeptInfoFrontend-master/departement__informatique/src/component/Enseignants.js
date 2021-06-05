@@ -54,7 +54,7 @@ function Enseignants() {
     });
     return (
         <div className="home-page">
-            <h1>Utilisateurs</h1>
+            <h1 className="text-center">Enseignants</h1>
             <Modal isOpen={openAddModal}>
                 <div className="modal-add-doc">
                     <div className="header-add-doc">

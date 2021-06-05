@@ -1,28 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="97c4c317-2a08-498b-8b49-5a10f8bd4726" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/.idea/departement__informatique.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/component/ActionCreator.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/component/EnseignantForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/component/Enseignants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/component/EtudiantForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/component/Etudiants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/component/Input.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/component/Reducers.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/component/Requests.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/component/Utilisateurs.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/component/actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/component/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/component/Navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/index.js" afterDir="false" />
-    </list>
+    <list default="true" id="97c4c317-2a08-498b-8b49-5a10f8bd4726" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

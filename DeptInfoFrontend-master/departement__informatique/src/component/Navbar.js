@@ -2,7 +2,6 @@ import React , {useState, useEffect} from 'react'
 import { Link } from "react-router-dom";
 import logo from '../image/Departementlogo1blanc.png'
 import '../Style/navbar.css'
-import Utilisateurs from "./Utilisateurs";
 
 function Navbar({ Accueil, Notes, Informations, Documents, Stage}) {
     
