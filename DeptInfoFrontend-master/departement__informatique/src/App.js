@@ -30,15 +30,33 @@ import Dept from './component/Dept'
 // import AdminCards from './component/AdminCards';
 
 import User from './component/User';
+import Enseignants from "./component/Enseignants";
+import Etudiants from "./component/Etudiants";
 
 
 
 function App() {
-  const [{ note_id }] = useStateValue();
+  //const [{ note_id }] = useStateValue();
   return (
     <div className="App">
       <Router>
        <Switch>
+           <Route path="/enseignants">
+               <Navbar />
+               <Enseignants />
+
+
+               <Footer />
+
+           </Route>
+           <Route path="/etudiants">
+               <Navbar />
+               <Etudiants />
+
+
+               <Footer />
+
+           </Route>
           <Route path="/Enseignant">
               <Navbar />
               <Enseignant />
@@ -112,7 +130,6 @@ function App() {
             <Footer />
 
           </Route> */}
-
 
           <Route path="/User">
             <Navbar />

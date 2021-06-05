@@ -2,6 +2,7 @@ import React , {useState, useEffect} from 'react'
 import { Link } from "react-router-dom";
 import logo from '../image/Departementlogo1blanc.png'
 import '../Style/navbar.css'
+import Utilisateurs from "./Utilisateurs";
 
 function Navbar({ Accueil, Notes, Informations, Documents, Stage}) {
     
@@ -60,12 +61,22 @@ function Navbar({ Accueil, Notes, Informations, Documents, Stage}) {
                                 <span className="nav-link" href="#">Stage</span>
                             </li>
                         </Link>
-
+                        <Link to="/enseignants">
+                            <li className={"nav-item " + Notes}>
+                                <span className="nav-link" href="#">Enseignants</span>
+                            </li>
+                        </Link>
+                        <Link to="/etudiants">
+                            <li className={"nav-item " + Notes}>
+                                <span className="nav-link" href="#">Etudiants</span>
+                            </li>
+                        </Link>
                         <Link to="/Dept">
                             <li className={"nav-item " + Notes}>
                                 <span className="nav-link" href="#">Departement</span>
                             </li>
                         </Link>
+
                        
                         
                     </ul>
