@@ -68,26 +68,26 @@ router.post('/add', function (req, res, next) {
 
 
 
-// router.delete('/delete/:id', function (req, res, next) {
-//     console.log(req.params.id)
-//     db.enseignant.destroy({
-//         where: {
-//             EnseignantId: req.params.id,
-//         }
-//     }).then(
-//          () => {
-//             res.status(200).json({
-//                 message: 'Deleted!'
-//             });
-//         }
-//     ).catch(
-//         (error) => {
-//             res.status(400).json({
-//                 error: error
-//             });
-// });
+router.delete('/delete/:id', function (req, res, next) {
+    console.log(req.params.id)
+    db.filiere.destroy({
+        where: {
+            filiereId: req.params.id,
+        }
+    }).then(
+         () => {
+            res.status(200).json({
+                message: 'Deleted!'
+            });
+        }
+    ).catch(
+        (error) => {
+            res.status(400).json({
+                error: error
+            });
+});
 
-// })
+ })
 
 
 router.get('/', function (req, res, next) {
