@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="97c4c317-2a08-498b-8b49-5a10f8bd4726" name="Default Changelist" comment="" />
+    <list default="true" id="97c4c317-2a08-498b-8b49-5a10f8bd4726" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/component/EnseignantForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/component/EnseignantForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/component/Enseignants.js" beforeDir="false" afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/component/Enseignants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/component/Etudiants.js" beforeDir="false" afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/component/Etudiants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/component/Requests.js" beforeDir="false" afterPath="$PROJECT_DIR$/../DeptInfoFrontend-master/departement__informatique/src/component/Requests.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,11 +42,22 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1622906285923</updated>
-      <workItem from="1622906288513" duration="2835000" />
+      <workItem from="1622906288513" duration="3603000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

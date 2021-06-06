@@ -123,7 +123,7 @@ function Enseignants() {
                         <td>
                             <Button
                                 variant="outline-primary"
-                                onClick={deleteSelectedEnseignant.bind(this, c.id)}
+                                onClick={deleteSelectedEnseignant.bind(this, c.EnseignantId)}
                             >
                                 Supprimer
                             </Button>

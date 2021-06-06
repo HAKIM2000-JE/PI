@@ -29,7 +29,7 @@ function Etudiants() {
     const cancelAddModal = () => {
         setOpenAddModal(false);
     };
-    const editEtudiant = etudiant => {
+    const editEtudiant = (etudiant) => {
         setSelectedEtudiant(etudiant);
         setOpenEditModal(true);
     };
@@ -96,8 +96,7 @@ function Etudiants() {
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Email</th>
-                    <th>Spécialité</th>
-                    <th>Grade</th>
+                    <th>Matricule</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -108,8 +107,7 @@ function Etudiants() {
                         <td>{c.nom}</td>
                         <td>{c.prenom}</td>
                         <td>{c.email}</td>
-                        <td>{c.specialite}</td>
-                        <td>{c.grade}</td>
+                        <td>{c.matricule}</td>
                         <td>
                             <Button
                                 variant="outline-primary"
@@ -121,7 +119,7 @@ function Etudiants() {
                         <td>
                             <Button
                                 variant="outline-primary"
-                                onClick={deleteSelectedEtudiant.bind(this, c.id)}
+                                onClick={deleteSelectedEtudiant.bind(this, c.etudiantId)}
                             >
                                 Supprimer
                             </Button>

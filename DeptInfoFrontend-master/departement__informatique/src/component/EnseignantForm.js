@@ -59,6 +59,7 @@ function EnseignantForm({
         const response = await getEnseignants();
         setEnseignants(response.data);
         onSave();
+        console.log(evt);
     };
     return (
         <div className="form">
