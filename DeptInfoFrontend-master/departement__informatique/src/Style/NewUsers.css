@@ -7,6 +7,23 @@
     z-index: 100;
 }
 
+
+.user{
+    display: grid;
+    place-items: center;
+    /* min-height: 90vh; */
+}
+
+.space{
+    min-height: 50vh;
+}
+
+.row_btn{
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+}
+
 /* Important part */
 .modal-dialog{
     overflow-y: initial !important
