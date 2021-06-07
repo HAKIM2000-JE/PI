@@ -26,45 +26,10 @@ const results = [];
 // };
 
 router.post('/add', function (req, res, next) {
-    console.log(req.body.files)
-    let file = req.files.file
-    console.log(file)
-
-
-    file.mv(`../public/documents__tableau__affichage/user.csv`, function (err) {
-        if (err) {
-            return res.status(500).send(err);
-        }
-        res.json({file: `../public/documents__tableau__affichage/user.csv` });
-    })
-    // var jsonString = JSON.stringify(req.body)
-    // console.log(jsonString)
-    // console.log(Array.from(files).forEach(file => console.log("Do something with " + file.name)))
-    
-    
-    CSVToJSON().fromFile(file).then(source => {
-        console.log(source)
-        // source.push({
-        //     "sku": "34890",
-        //     "title": "Fortnite",
-        //     "hardware": "Nintendo Switch",
-        //     "price": "00.00"
-        // });
-
-    })
+   
     
 
-    // fs.createReadStream(req.body.file)
-    //     .pipe(csv())
-    //     .on('data', (data) => results.push(data))
-    //     .on('end', () => {
-    //         console.log(results);
-    //         // [
-    //         //   { NAME: 'Daffy Duck', AGE: '24' },
-    //         //   { NAME: 'Bugs Bunny', AGE: '22' }
-    //         // ]
-    //     });
-    // console.log(results);
+   
     
 
     db.enseignant.create({
