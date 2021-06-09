@@ -19,6 +19,7 @@ var enseignantRouter = require('./routes/enseignant');
 var etudiantRouter = require('./routes/etudiant');
 var departementRouter = require('./routes/departement');
 var filiereRouter = require('./routes/filiere');
+var moduleRouter = require('./routes/module');
 
 var uploadRouter = require('./routes/upload');
 
@@ -54,6 +55,7 @@ app.use('/enseignant', enseignantRouter);
 app.use('/etudiant', etudiantRouter);
 app.use('/departement', departementRouter);
 app.use('/filiere', filiereRouter);
+app.use('/module', moduleRouter);
 
 // app.use('/upload', uploadRouter);
 
@@ -113,26 +115,22 @@ app.post('/EnseignantCsv', (req, res, next)=>{
       
       
 
-        CSVToJSON().fromFile(`public/documents__tableau__affichage/user.csv`).then(source => {
+        CSVToJSON({delimiter:[";"]}).fromFile(`public/documents__tableau__affichage/user.csv`).then(source => {
             console.log(source)
              source.map((user)=>{
                  db.enseignant.create({
                      nom: user.nom,
                      prenom: user.prenom,
-                     EnseignantPassword: user.password,
+                     EnseignantPassword: user.EnseignantPassword,
                      email: user.email,
                      specialite: user.specialite,
                      grade: user.grade,
+                     departementId: user.departementId
 
-                 }).then((doc) => res.send(doc));
+                 }).then(console.log("Request treated successfully!"));
 
              })
-            // source.push({
-            //     "sku": "34890",
-            //     "title": "Fortnite",
-            //     "hardware": "Nintendo Switch",
-            //     "price": "00.00"
-            // });
+            
 
         })
 
@@ -146,7 +144,6 @@ app.post('/EtudiantCsv', (req, res, next) => {
 
     console.log({ file: file })
 
-    // console.log("sj kjsdflkj kjdskjf dsfkljdalkjh")
 
 
 
@@ -159,32 +156,23 @@ app.post('/EtudiantCsv', (req, res, next) => {
 
 
 
-        // Importing csv-parser into fsdata
-        const csvdata = require('csv-parser')
-        const fsdata = require('fs');
 
-
-
-        CSVToJSON().fromFile(`public/documents__tableau__affichage/user.csv`).then(source => {
+        CSVToJSON({delimiter:[";"]}).fromFile(`public/documents__tableau__affichage/user.csv`).then(source => {
             console.log(source)
             source.map((user) => {
                 db.etudiant.create({
                     nom: user.nom,
                     prenom: user.prenom,
-                    EtudiantPassword: user.password,
+                    EtudiantPassword: user.EtudiantPassword,
                     email: user.email,
                     matricule: user.matricule,
                     genie: user.genie,
+                    departementId: user.departementId
 
                 }).then((doc) => res.send(doc));
 
             })
-            // source.push({
-            //     "sku": "34890",
-            //     "title": "Fortnite",
-            //     "hardware": "Nintendo Switch",
-            //     "price": "00.00"
-            // });
+            
 
         })
 
